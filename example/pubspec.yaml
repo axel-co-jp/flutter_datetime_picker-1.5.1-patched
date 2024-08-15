@@ -1,3 +1,5 @@
+publish_to: none # パッケージを公開不可にする
+
 name: example
 description: A new Flutter application.
 
