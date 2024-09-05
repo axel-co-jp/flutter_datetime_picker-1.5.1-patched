@@ -1,154 +1,28 @@
-# Flutter Datetime Picker
+# flutter_datetime_picker-1.5.1-patched
 
-[(Pub) flutter_datetime_picker](https://pub.dev/packages/flutter_datetime_picker)
+This is a patched version of the original [flutter_datetime_picker](https://pub.dev/packages/flutter_datetime_picker/versions/1.5.1) (version 1.5.1). This library provides a customizable datetime picker for Flutter apps. The patch resolves an issue causing iOS build errors due to duplicate imports in the `DatePickerTheme`.
 
-A flutter date time picker inspired by [flutter-cupertino-date-picker](https://github.com/wuzhendev/flutter-cupertino-date-picker)
+## Changes
 
-you can choose date / time / date&time in multiple languages:
+In this patched version, the following issue has been addressed:
+- Fixed an iOS build error caused by duplicate imports of `DatePickerTheme`.
 
-- Albanian(sq)
-- Arabic(ar)
-- Armenian(hy)
-- Azerbaijan(az)
-- Basque(eu)
-- Bengali(bn)
-- Bulgarian(bg)
-- Catalan(cat)
-- Chinese(zh)
-- Danish(da)
-- Dutch(nl)
-- English(en)
-- French(fr)
-- German(de)
-- Indonesian(id)
-- Italian(it)
-- Japanese(jp)
-- Kazakh(kk)
-- Korean(ko)
-- Persian(fa)
-- Polish (pl)
-- Portuguese(pt)
-- Russian(ru)
-- Spanish(es)
-- Swedish(sv)
-- Thai(th)
-- Turkish(tr)
-- Vietnamese(vi)
-- Khmer(kh)
+## Original Project
 
+This project is a patched version of the original [flutter_datetime_picker](https://github.com/Realank/flutter_datetime_picker) by Realank, licensed under the [Apache License 2.0](https://www.apache.org/licenses/LICENSE-2.0).
 
-and you can also custom your own picker content
+All changes are made in compliance with the original licensing terms.
 
-| Date picker          | Time picker          | Date Time picker                 |
-| -------------------- | -------------------- | -------------------------------- |
-| ![](screen_date.png) | ![](screen_time.png) | ![](screen_datetime_chinese.png) |
+## Installation
 
-International:
+To use this patched version, add the following to your `pubspec.yaml`:
 
-| Date Time picker (Chinese)       | Date Time picker (America)       | Date Time picker (Dutch)       | Date Time picker (Russian)       |
-| -------------------------------- | -------------------------------- | ------------------------------ | -------------------------------- |
-| ![](screen_datetime_chinese.png) | ![](screen_datetime_english.png) | ![](screen_datetime_dutch.png) | ![](screen_datetime_russian.png) |
-
-
-## Demo App
-
-![main page](main_page.png)
-
-## Usage
-
+```yaml
+dependencies:
+  flutter_datetime_picker:
+    git:
+      url: https://github.com/axel-co-jp/flutter_datetime_picker-1.5.1-patched.git
 ```
-TextButton(
-    onPressed: () {
-        DatePicker.showDatePicker(context,
-                              showTitleActions: true,
-                              minTime: DateTime(2018, 3, 5),
-                              maxTime: DateTime(2019, 6, 7), onChanged: (date) {
-                            print('change $date');
-                          }, onConfirm: (date) {
-                            print('confirm $date');
-                          }, currentTime: DateTime.now(), locale: LocaleType.zh);
-    },
-    child: Text(
-        'show date time picker (Chinese)',
-        style: TextStyle(color: Colors.blue),
-    ));
-```
+## License
 
-## Customize
-
-If you want to customize your own style of date time picker, there is a class called CommonPickerModel, every type of date time picker is extended from this class, you can refer to other picker model (eg. DatePickerModel), and write your custom one, then pass this model to showPicker method, so that your own date time picker will appear, it’s easy, and will perfectly meet your demand
-
-How to customize your own picker model:
-
-```
-class CustomPicker extends CommonPickerModel {
-  String digits(int value, int length) {
-    return '$value'.padLeft(length, "0");
-  }
-
-  CustomPicker({DateTime currentTime, LocaleType locale}) : super(locale: locale) {
-    this.currentTime = currentTime ?? DateTime.now();
-    this.setLeftIndex(this.currentTime.hour);
-    this.setMiddleIndex(this.currentTime.minute);
-    this.setRightIndex(this.currentTime.second);
-  }
-
-  @override
-  String leftStringAtIndex(int index) {
-    if (index >= 0 && index < 24) {
-      return this.digits(index, 2);
-    } else {
-      return null;
-    }
-  }
-
-  @override
-  String middleStringAtIndex(int index) {
-    if (index >= 0 && index < 60) {
-      return this.digits(index, 2);
-    } else {
-      return null;
-    }
-  }
-
-  @override
-  String rightStringAtIndex(int index) {
-    if (index >= 0 && index < 60) {
-      return this.digits(index, 2);
-    } else {
-      return null;
-    }
-  }
-
-  @override
-  String leftDivider() {
-    return "|";
-  }
-
-  @override
-  String rightDivider() {
-    return "|";
-  }
-
-  @override
-  List<int> layoutProportions() {
-    return [1, 2, 1];
-  }
-
-  @override
-  DateTime finalTime() {
-    return currentTime.isUtc
-        ? DateTime.utc(currentTime.year, currentTime.month, currentTime.day,
-            this.currentLeftIndex(), this.currentMiddleIndex(), this.currentRightIndex())
-        : DateTime(currentTime.year, currentTime.month, currentTime.day, this.currentLeftIndex(),
-            this.currentMiddleIndex(), this.currentRightIndex());
-  }
-}
-```
-
-
-## Getting Started
-
-For help getting started with Flutter, view our online [documentation](https://flutter.io/).
-
-For help on editing package code, view the [documentation](https://flutter.io/developing-packages/).
+This project is licensed under the [Apache License 2.0](https://www.apache.org/licenses/LICENSE-2.0), the same as the original flutter_datetime_picker.
